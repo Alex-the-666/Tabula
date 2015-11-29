@@ -99,7 +99,6 @@ public class ExportJava extends Exporter
         {
             CubeInfo cube = e.getKey();
             String field = e.getValue();
-            sb.append("        this." + field + ".setRotationPoint(" + cube.position[0] + "F, " + cube.position[1] + "F, " + cube.position[2] + "F);\n");
         if(!(cube.rotation[0] == 0.0D && cube.rotation[1] == 0.0D && cube.rotation[2] == 0.0D))
             {
                 sb.append("        this.setRotateAngle(" + field + ", " + Math.toRadians(cube.rotation[0]) + "F, " + Math.toRadians(cube.rotation[1]) + "F, " + Math.toRadians(cube.rotation[2]) + "F);\n");
