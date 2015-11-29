@@ -99,25 +99,12 @@ public class ExportJava extends Exporter
         {
             CubeInfo cube = e.getKey();
             String field = e.getValue();
-            sb.append("        this." + field + " = new ModelRenderer(this, " + cube.txOffset[0] + ", " + cube.txOffset[1] + ");\n");
-            if(cube.txMirror)
-            {
-                sb.append("        this." + field + ".mirror = true;\n");
-            }
             sb.append("        this." + field + ".setRotationPoint(" + cube.position[0] + "F, " + cube.position[1] + "F, " + cube.position[2] + "F);\n");
-            sb.append("        this." + field + ".addBox(" + cube.offset[0] + "F, " + cube.offset[1] + "F, " + cube.offset[2] + "F, " + cube.dimensions[0] + ", " + cube.dimensions[1] + ", " + cube.dimensions[2] + ", " + cube.mcScale + "F);\n");
-            if(!(cube.rotation[0] == 0.0D && cube.rotation[1] == 0.0D && cube.rotation[2] == 0.0D))
+        if(!(cube.rotation[0] == 0.0D && cube.rotation[1] == 0.0D && cube.rotation[2] == 0.0D))
             {
                 sb.append("        this.setRotateAngle(" + field + ", " + Math.toRadians(cube.rotation[0]) + "F, " + Math.toRadians(cube.rotation[1]) + "F, " + Math.toRadians(cube.rotation[2]) + "F);\n");
             }
-            for(CubeInfo child : cube.getChildren())
-            {
-                parentMap.put(child, cube);
-            }
-            if(parentMap.get(cube) != null)
-            {
-                childSb.append("        this." + cubeFieldMap.get(parentMap.get(cube)) + ".addChild(this." + field + ");\n");
-            }
+          
         }
         sb.append(childSb.toString());
         for(Map.Entry<CubeInfo, CubeInfo> e : parentMap.entrySet())
